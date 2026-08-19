@@ -28,8 +28,11 @@ export default async function CategoryPage({
           { label: category.name },
         ]}
       />
-      <h1 className="mt-3 text-3xl font-semibold text-foreground">
-        {category.name} in {city.name}
+      <p className="mt-3 font-data text-xs uppercase tracking-[0.2em] text-terracotta">
+        {city.name}
+      </p>
+      <h1 className="font-display font-display-wonk mt-1 text-4xl text-foreground">
+        {category.name}
       </h1>
       {category.blurb && <p className="mt-3 max-w-2xl text-muted">{category.blurb}</p>}
 

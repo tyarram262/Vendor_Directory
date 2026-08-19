@@ -34,20 +34,33 @@ export default async function VendorPage({
       />
 
       <div className="mt-4">
-        <Gallery images={vendor.portfolioImages} vendorName={vendor.name} />
+        <Gallery
+          images={vendor.portfolioImages}
+          vendorName={vendor.name}
+          vendorSlug={vendor.slug}
+        />
       </div>
 
       <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <h1 className="text-3xl font-semibold text-foreground">{vendor.name}</h1>
+          <p className="font-data text-xs uppercase tracking-[0.2em] text-terracotta">
+            {vendor.category.name} in {vendor.city.name}
+          </p>
+          <h1 className="font-display font-display-wonk mt-2 text-4xl text-foreground">
+            {vendor.name}
+          </h1>
           <p className="mt-2 text-lg text-muted">{vendor.shortPitch}</p>
-          <p className="mt-6 whitespace-pre-line text-foreground">{vendor.description}</p>
+          <p className="mt-6 whitespace-pre-line leading-relaxed text-foreground">
+            {vendor.description}
+          </p>
         </div>
 
         <div className="space-y-6">
-          <div className="rounded-lg border border-border p-5">
-            <p className="text-sm text-muted">Price range</p>
-            <p className="mt-1 text-xl font-medium text-foreground">
+          <div className="rounded-lg border border-t-2 border-border border-t-brass bg-card p-5">
+            <p className="font-data text-xs uppercase tracking-wider text-muted">
+              Price range
+            </p>
+            <p className="mt-1 font-display text-2xl text-foreground">
               {formatPriceRange(vendor.priceRangeMin, vendor.priceRangeMax)}
             </p>
           </div>

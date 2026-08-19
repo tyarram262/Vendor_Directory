@@ -11,7 +11,12 @@ export const metadata: Metadata = {
 export default function PlanPage() {
   return (
     <main className="mx-auto max-w-xl px-4 py-16 sm:px-6">
-      <h1 className="text-3xl font-semibold text-foreground">Not sure where to start?</h1>
+      <p className="font-data text-xs uppercase tracking-[0.2em] text-terracotta">
+        General inquiry
+      </p>
+      <h1 className="font-display font-display-wonk mt-2 text-4xl text-foreground">
+        Not sure where to start?
+      </h1>
       <p className="mt-3 text-muted">
         Tell us a bit about your wedding and we&apos;ll help match you with the right
         vendors in Udaipur or Goa.

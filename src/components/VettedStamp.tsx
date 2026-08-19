@@ -32,6 +32,9 @@ export function VettedStamp({
       role="img"
       aria-label={`${label} mark`}
     >
+      {/* Opaque backing so the mark stays legible over a busy photo, like a
+          real wax seal or sticker rather than an etched outline. */}
+      <circle cx="50" cy="50" r="47" fill="var(--card)" />
       <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" strokeWidth="1.5" />
       <circle cx="50" cy="50" r="39" fill="none" stroke="currentColor" strokeWidth="1" />
       <path

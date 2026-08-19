@@ -15,7 +15,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="w-full rounded-lg bg-foreground px-5 py-3 font-medium text-background transition-opacity hover:opacity-90 disabled:opacity-50"
+      className="w-full rounded-lg bg-terracotta px-5 py-3 font-medium text-background transition-opacity hover:opacity-90 disabled:opacity-50"
     >
       {pending ? "Sending…" : "Send inquiry"}
     </button>
@@ -49,7 +49,7 @@ function Field({
         required={required}
         placeholder={placeholder}
         aria-invalid={error ? "true" : undefined}
-        className="mt-1 w-full rounded-md border border-border bg-white px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-foreground/20"
+        className="mt-1 w-full rounded-md border border-border bg-card px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-foreground/20"
       />
       {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
     </div>
@@ -61,8 +61,10 @@ export function InquiryForm({ vendorId }: { vendorId?: string }) {
 
   if (state.status === "success") {
     return (
-      <div className="rounded-lg border border-border bg-white p-5">
-        <p className="font-medium text-foreground">Thank you — we&apos;ve got your inquiry.</p>
+      <div className="rounded-lg border border-t-2 border-border border-t-brass bg-card p-5">
+        <p className="font-display text-lg text-foreground">
+          Thank you — we&apos;ve got your inquiry.
+        </p>
         <p className="mt-1 text-sm text-muted">
           We&apos;ll follow up by email within a couple of days.
         </p>
@@ -101,7 +103,7 @@ export function InquiryForm({ vendorId }: { vendorId?: string }) {
           id="message"
           name="message"
           rows={4}
-          className="mt-1 w-full rounded-md border border-border bg-white px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-foreground/20"
+          className="mt-1 w-full rounded-md border border-border bg-card px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-foreground/20"
         />
       </div>
 

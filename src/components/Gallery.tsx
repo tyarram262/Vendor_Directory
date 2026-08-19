@@ -1,15 +1,21 @@
 import Image from "next/image";
+import { VettedStamp } from "@/components/VettedStamp";
 
 /**
  * Server-rendered responsive grid — no lightbox/carousel client JS in v1.
  * First image runs wide as the hero shot; the rest fill a smaller grid below it.
+ * Carries the vetted stamp on the hero shot, unconditionally (unlike VendorCard,
+ * which reserves it for featured listings) — this is the vendor detail page,
+ * the brief's explicit "build trust" moment, so every vendor gets it here.
  */
 export function Gallery({
   images,
   vendorName,
+  vendorSlug,
 }: {
   images: { url: string }[];
   vendorName: string;
+  vendorSlug: string;
 }) {
   if (images.length === 0) {
     return (
@@ -31,6 +37,11 @@ export function Gallery({
           sizes="100vw"
           priority
           className="object-cover"
+        />
+        <VettedStamp
+          id={vendorSlug}
+          size={72}
+          className="absolute right-3 bottom-3 drop-shadow-md sm:right-4 sm:bottom-4"
         />
       </div>
       {rest.length > 0 && (
