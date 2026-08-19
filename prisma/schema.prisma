@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model City {
+  id           String   @id @default(cuid())
+  name         String // "Udaipur", "Goa"
+  slug         String   @unique
+  intro        String // short copy for the city landing page
+  heroImageUrl String?
+  vendors      Vendor[]
+}
+
+model Category {
+  id      String   @id @default(cuid())
+  name    String // "Venues", "Photography", "Decor & Styling", "Catering", "Priest & Ritual Services"
+  slug    String   @unique
+  blurb   String?
+  order   Int      @default(0)
+  vendors Vendor[]
+}
+
+model Vendor {
+  id              String        @id @default(cuid())
+  name            String
+  slug            String        @unique
+  cityId          String
+  city            City          @relation(fields: [cityId], references: [id])
+  categoryId      String
+  category        Category      @relation(fields: [categoryId], references: [id])
+  shortPitch      String // one-liner for card view
+  description     String // longer bio for detail page
+  priceRangeMin   Int? // in USD, for the diaspora audience's mental model
+  priceRangeMax   Int?
+  portfolioImages VendorImage[]
+  contactNote     String? // internal note, not shown publicly
+  featured        Boolean       @default(false)
+  inquiries       Inquiry[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([cityId, categoryId])
+}
+
+model VendorImage {
+  id       String @id @default(cuid())
+  vendorId String
+  vendor   Vendor @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  url      String
+  order    Int    @default(0)
+}
+
+model Inquiry {
+  id          String   @id @default(cuid())
+  vendorId    String? // nullable — general inquiries aren't tied to one vendor
+  vendor      Vendor?  @relation(fields: [vendorId], references: [id])
+  coupleName  String
+  email       String
+  phone       String?
+  weddingDate String? // free text, couples often aren't locked in yet
+  guestCount  String?
+  budgetRange String?
+  message     String?
+  status      String   @default("new") // "new" | "contacted" | "closed"
+  createdAt   DateTime @default(now())
+
+  @@index([status, createdAt])
+}

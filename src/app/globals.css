@@ -1,26 +1,74 @@
 @import "tailwindcss";
 
+/*
+ * Design system, established in phase 6 for the landing + city pages and
+ * shared globally since colors/type are CSS custom properties every page
+ * already reads through (bg-background, text-foreground, text-muted,
+ * border-border). Palette is grounded in real wedding materials rather than
+ * generic "elegant" tokens: marble (paper), henna ink, sindoor terracotta,
+ * banana-leaf green, temple brass.
+ *
+ * No prefers-color-scheme block, on purpose: this brand commits to one warm,
+ * light surface — a dark auto-flip would invert the ivory ground and read
+ * as broken, not "supports dark mode."
+ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #fbf6ee; /* warm ivory ground, like old cardstock */
+  --ink: #2b211a; /* near-black, warmed toward henna/dried ink */
+  --card: #fffdf9; /* card surfaces, just barely lifted off the paper */
+  --muted: #79695c;
+  --border: #e4d9c7;
+
+  --terracotta: #c1502e; /* sindoor / fired clay — primary accent */
+  --terracotta-ink: #8f3a20; /* pressed, for text-on-light use */
+  --deep-green: #2f4c3b; /* banana leaf, marble inlay — secondary accent */
+  --brass: #b08d42; /* temple brass, dupatta thread — tertiary accent */
+
+  --background: var(--paper);
+  --foreground: var(--ink);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-terracotta: var(--terracotta);
+  --color-terracotta-ink: var(--terracotta-ink);
+  --color-deep-green: var(--deep-green);
+  --color-brass: var(--brass);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-karla);
+  --font-data: var(--font-courier-prime);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* A single characterful pass on the display face's inkier alternates
+   (Fraunces' WONK axis) — used sparingly, headlines only, not body text. */
+.font-display-wonk {
+  font-variation-settings: "WONK" 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.75rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .rise-in {
+    animation: rise-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
 }
